@@ -1,0 +1,62 @@
+# Configuração para Análise de Métricas de Classificação
+# =========================================================
+
+# Configurações de Entrada
+input:
+  # Caminho do arquivo de dados (suporta .csv ou .parquet)
+  data_path: "/home/gabriel.rocha/ondemand/data/teste_cruva_roc/otimizacao"
+  
+  # Nome das colunas (deixe null para detecção automática)
+  score_column: 'total_score'  # Auto-detecta colunas com 'score' no nome
+  label_column: null  # Auto-detecta colunas com match/label (VP, FP, VN, FN)
+  uf_column: null     # Auto-detecta colunas com 'municipio' no nome
+  
+# Configurações de Análise
+analysis:
+  # Análise por UF (extrai 2 primeiros dígitos da coluna de município)
+  analyze_by_uf: true
+  
+  # Análise geral (todos os dados agregados)
+  analyze_overall: true
+  
+  # Intervalo para thresholds na matriz de confusão
+  threshold_step: 0.05
+
+# Configurações de Saída
+output:
+  # Diretório base para salvar resultados
+  output_dir: "/opt/storage/raw/cidacs/cidacs_geolinkage/workspaces/gabriel_rocha_workspace/data/sergipe_baseline_sim_sinasc_geocodificacao_I_II/sim/XI_revisao_manual/graficos"
+  
+  # Salvar arquivos (CSVs e gráficos)
+  save_files: false
+  
+  # Exibir gráficos no notebook
+  display_plots: false
+  
+  # Salvar métricas em CSV
+  save_metrics: false
+
+# Configurações de Visualização
+visualization:
+  # Título dos gráficos (usa {uf} como placeholder)
+  plot_title_roc: "Curva ROC – {uf}"
+  plot_title_confusion: "Matriz de Confusão x Ponto de Corte – {uf}"
+  
+  # Labels dos eixos
+  xlabel_confusion: "Ponto de corte"
+  ylabel_confusion: "Número de registros"
+  xlabel_roc: "FPR (Taxa de Falsos Positivos)"
+  ylabel_roc: "TPR (Taxa de Verdadeiros Positivos)"
+  
+  # Legendas personalizadas
+  legend_vp: "VP (Verdadeiro Positivo)"
+  legend_fp: "FP (Falso Positivo)"
+  legend_vn: "VN (Verdadeiro Negativo)"
+  legend_fn: "FN (Falso Negativo)"
+  
+  # DPI para salvar imagens
+  dpi: 150
+  
+  # Tamanho das figuras
+  figsize_roc: [8, 7]
+  figsize_confusion: [12, 6]
